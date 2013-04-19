@@ -1,0 +1,29 @@
+# Default environment variables for Elastic Beanstalk
+export EB_ROOT=/opt/elasticbeanstalk
+export EB_CONFIG_FILE=$EB_ROOT/deploy/configuration/containerconfiguration
+export EB_CONFIG_SOURCE_BUNDLE=$EB_ROOT/deploy/appsource/source_bundle
+export EB_CONFIG_APP_BASE=/var/app
+export EB_CONFIG_APP_SUPPORT=$EB_CONFIG_APP_BASE/support
+export EB_CONFIG_APP_ONDECK=$EB_CONFIG_APP_BASE/ondeck
+export EB_CONFIG_APP_CURRENT=$EB_CONFIG_APP_BASE/current
+export EB_CONFIG_APP_LOGS=$EB_CONFIG_APP_SUPPORT/logs
+export EB_CONFIG_APP_ASSETS=$EB_CONFIG_APP_SUPPORT/assets
+export EB_CONFIG_APP_PIDS=$EB_CONFIG_APP_SUPPORT/pids
+export EB_CONFIG_ARCH="64"
+export EB_CONFIG_APP_USER=webapp
+export EB_CONFIG_HTTP_PORT=80
+
+# Container specific settings
+export EB_CONFIG_PASSENGER_URL="https://elasticbeanstalk-env-resources-us-west-2.s3.amazonaws.com/eb_ruby/v1.7-1/passenger-standalone-3.0.17-1.9.3-64bit.tar.gz"
+export EB_CONFIG_NODEJS_URL="https://elasticbeanstalk-env-resources-us-west-2.s3.amazonaws.com/eb_ruby/v1.7-1/node-v0.8.12-linux-64bit.tar.gz"
+export RAILS_SKIP_ASSET_COMPILATION='false'
+export RAILS_SKIP_MIGRATIONS='false'
+export RUBY18_MODE="false"
+export BUNDLE_WITHOUT="test:development"
+export RACK_ENV="production"
+
+# Source all generated envvars files
+prefix=/opt/elasticbeanstalk/support/envvars.d/
+for e in sysenv appenv; do
+  [ -f $prefix/$e ] && . $prefix/$e
+done
