@@ -1,0 +1,23 @@
+Bluepill.application('tomcat', :log_file => "/var/log/eb-bluepill.log") do |app|
+
+  app.process('httpd') do |httpd_process|
+    httpd_process.start_command = '/etc/init.d/httpd start'
+    httpd_process.stop_command = '/etc/init.d/httpd stop'
+    httpd_process.restart_command = '/etc/init.d/httpd restart'
+    httpd_process.pid_file = '/var/run/httpd/httpd.pid'
+    httpd_process.start_grace_time = 30.seconds
+    httpd_process.stop_grace_time = 30.seconds
+    httpd_process.restart_grace_time = 60.seconds
+  end    
+
+  app.process('tomcat') do |tomcat_process|
+    tomcat_process.start_command = '/etc/init.d/tomcat7 start'
+    tomcat_process.stop_command = '/etc/init.d/tomcat7 stop'
+    tomcat_process.restart_command = '/etc/init.d/tomcat7 restart'
+    tomcat_process.pid_file = '/var/run/tomcat7.pid'
+
+    tomcat_process.start_grace_time = 60.seconds
+    tomcat_process.stop_grace_time = 60.seconds
+    tomcat_process.restart_grace_time = 120.seconds
+  end
+end
