@@ -1,0 +1,8 @@
+c5e24f251b24a2e2890fa9c97eef3e91  bigdecimal-1.1.0.gem
+76a43745352365221b2b7ad06e7a409a  bundler-1.2.1.gem
+9e59921f4e89172b5acb924e5cf7fb5e  daemon_controller-1.0.0.gem
+16eb06dc3661c89301de6c73c71bb16e  fastthread-1.0.7.gem
+3c0185415bfabce7e9b4d0394c92661b  json-1.7.5.gem
+505d946951fa18fccf496b1bf0915f00  passenger-3.0.17.gem
+a278fe5208c2412b724d6eac432e2807  rack-1.4.1.gem
+28e731d5c59dd721d6387f80b25a2ba1  rake-0.9.2.2.gem
