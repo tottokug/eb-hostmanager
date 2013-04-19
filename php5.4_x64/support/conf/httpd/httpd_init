@@ -1,0 +1,73 @@
+# Proxy init.d requests through to upstart to manage Apache
+
+echo 'Equivalent Upstart operations: start httpd, stop httpd, restart httpd, status httpd'
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+RETVAL=0
+
+function check_return()
+{
+  if [ "$1" != 0 ]; then
+    echo '[FAIL]'
+  else
+    echo '[OK]'
+  fi
+}
+
+function safe_restart()
+{
+  echo 'Stopping httpd'
+  stop httpd || true
+  echo 'Starting httpd'
+  start httpd
+}
+
+# See how we were called.
+case "$1" in
+  start)
+    # Start httpd
+    echo 'Starting httpd'
+    initctl start httpd
+    RETVAL=$?
+    check_return $RETVAL
+    ;;
+  stop)
+    # Stop httpd
+    echo 'Stopping httpd'
+    initctl stop httpd
+    RETVAL=$?
+    check_return $RETVAL
+    ;;
+  status)
+    # Check if httpd is running
+    status httpd
+    RETVAL=$?
+    ;;
+  restart)
+    # Do a hard restart. Starts httpd if it is not running.
+    safe_restart
+    RETVAL=$?
+    check_return $RETVAL
+    ;;
+  graceful)
+    # Gracefully restarts httpd if possible
+    echo 'Gracefully restarting httpd'
+    # Only do a graceful restart if the pid file is found
+    if [ -f /var/run/httpd/httpd.pid ]; then
+      # If the graceful restart fails, do a hard restart
+      kill -s USR1 `cat /var/run/httpd/httpd.pid` || safe_restart
+    else
+      # The pid was not found, so safely do a hard restart
+      safe_restart
+    fi
+    RETVAL=$?
+    check_return $RETVAL
+    ;;
+  *)
+    echo $"Usage: $prog {start|stop|restart|status|graceful}"
+    exit 1
+esac
+
+exit $RETVAL
