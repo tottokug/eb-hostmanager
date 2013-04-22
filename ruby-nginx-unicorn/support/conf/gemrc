@@ -1,0 +1,4 @@
+gem: "--bindir /usr/bin --no-rdoc --no-ri"
+:sources:
+  - http://production.cf.rubygems.org
+  - http://rubygems.org

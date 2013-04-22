@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+. /opt/elasticbeanstalk/support/envvars
+
+# fixes http://code.google.com/p/phusion-passenger/issues/detail?id=614
+export HOME=/home/$EB_CONFIG_APP_USER
+
+OPTS="-p $EB_CONFIG_HTTP_PORT --pid-file $EB_CONFIG_APP_PIDS/passenger.pid"
+
+function start() {
+  touch $EB_CONFIG_APP_LOGS/passenger.log
+  chown $EB_CONFIG_APP_USER:$EB_CONFIG_APP_USER \
+    $EB_CONFIG_APP_LOGS/passenger.log
+  passenger start $EB_CONFIG_APP_CURRENT $OPTS \
+    -d -e ${RACK_ENV:-$RAILS_ENV} --user $EB_CONFIG_APP_USER \
+    --log-file $EB_CONFIG_APP_LOGS/passenger.log
+}
+
+function stop() {
+  passenger stop $OPTS
+}
+
+function status() {
+  passenger status $OPTS
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status
+    ;;
+  restart|graceful)
+    stop
+    start
+    ;;
+  reload)
+    su -c "touch $EB_CONFIG_APP_CURRENT/tmp/restart.txt" $EB_CONFIG_APP_USER
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|reload|status}"
+    exit 1
+    ;;
+esac
+
+exit 0

@@ -1,0 +1,19 @@
+{
+    "environment": [
+        "RACK_ENV=production", 
+        "RAILS_SKIP_ASSET_COMPILATION=false", 
+        "RAILS_SKIP_MIGRATIONS=false", 
+        "BUNDLE_WITHOUT=test:development", 
+        "AWS_ACCESS_KEY_ID=", 
+        "AWS_SECRET_KEY=", 
+        "PARAM1=", 
+        "PARAM2="
+    ], 
+    "http_port": "80", 
+    "system": {
+        "LogPublicationControl": "false", 
+        "AWSEBAgentId": "CVeycmtbd8cA6jWTB0TcBj6qxd3joOLmYPnMdj9GW1DuOrwV5wRfvzs2GXYXRRO4F9pPYZSIuG8ezVuUnQMfKyM3U49949ykmvPUxmJq90ttjKxXzwSV7wVXz9AGBxUTNsGQ4uBPPhrq7iYrcx0OZjeMgrKF3fQasvYqzeD3XpXxoG2rg7fd9rLmfh05sVgHQ8pgm5zQJq2VLrRpNikMFqkMPDNFq7s0gNnobzDYjvpoPdQGF8lOy7fl9yW3sfM", 
+        "AWSEBReferrerId": "Fu1HuLuY09szfTqxtmzPyrHEt5uPzXYtSrwxyw4sfwYveoeppPKeym12wQum0eZKF8DhuwugXOZfvxOZph89K75VxKK5jlnAaxySrMtWUxPCfGESkXNYjB0MBR4uuc4TLzwsY4dhnHqMvEUoC8DyyIy4MV0f7juZ3WbgyCZzLZAaL5zbHzQw22Cp3N3ec46TndFJVYuXRHGTlfUh3ke3ZqxQUey7UAtYwylzYIzTJwxjbBny1jrUFgmhxCkuYJN"
+    }
+}
+
